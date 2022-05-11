@@ -8,18 +8,36 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import EmailIcon from '@material-ui/icons/Email';
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Head from 'next/head';
 
 const theme = createTheme();
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }));
+
 export function Register( { onChange, onSubmit } ){
 
+    // const classes = useStyles();
+
     return (
+        <>
         <ThemeProvider theme={theme}>
+        {/* <form className={classes.root} noValidate autoComplete="off"> */}
             <Head>
                 <title>사용자| 회원가입</title>
             </Head>
@@ -36,7 +54,8 @@ export function Register( { onChange, onSubmit } ){
                     <Avatar
                         sx={{
                             m: 1,
-                            bgcolor: 'secondary.main'
+                            bgcolor: '#677381'
+                            // bgcolor: 'secondary.main'
                         }}>
                         <LockOutlinedIcon/>
                     </Avatar>
@@ -45,26 +64,39 @@ export function Register( { onChange, onSubmit } ){
                     </Typography>
                         <Box component="form" onSubmit={onSubmit} noValidate="noValidate" sx={{ mt: 3 }} >
                             <Grid container spacing={2}>
-                                <Grid item xs={6} sm={6}>
-                                    <TextField
-                                        name="userid"
-                                        required={true}
-                                        fullWidth={true}
-                                        id="userid"
-                                        label="사용자 ID"
-                                        onChange={onChange}
-                                        />
-                                </Grid>
 
-                                <Grid item xs={6}>
+                                <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            id="email"
+                                            label="E-mail"
+                                            name="email"
+                                            onChange={onChange}
+                                            InputProps={{
+                                                startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <EmailOutlinedIcon />
+                                                </InputAdornment>
+                                                ),
+                                            }} />
+                                </Grid>
+                               
+                                <Grid item xs={12}>
                                     <TextField
                                         required
                                         fullWidth={true}
                                         id="name"
-                                        label="이 름"
+                                        label="Name"
                                         name="name"
                                         onChange={onChange}
-                                        />
+                                        InputProps={{
+                                            startAdornment: (
+                                            <InputAdornment position="start">
+                                                <PermIdentityOutlinedIcon />
+                                            </InputAdornment>
+                                            ),
+                                        }} />
                                 </Grid>
 
                                 <Grid item xs={12}>
@@ -72,53 +104,17 @@ export function Register( { onChange, onSubmit } ){
                                         required
                                         fullWidth
                                         id="password"
-                                        label="비밀번호"
+                                        label="Password"
                                         name="password"
                                         onChange={onChange}
-                                        />
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="email"
-                                        label="이메일"
-                                        name="email"
-                                        onChange={onChange}
-                                        />
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="phone"
-                                        label="폰번호"
-                                        name="phone"
-                                        onChange={onChange}
-                                        />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="birth"
-                                        label="생년월일"
-                                        name="birth"
-                                        onChange={onChange}
-                                        />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="address"
-                                        label="주소"
-                                        name="address"
-                                        onChange={onChange}
-                                        />
-                                </Grid>
+                                        InputProps={{
+                                            startAdornment: (
+                                            <InputAdornment position="start">
+                                                <LockOutlinedIcon />
+                                            </InputAdornment>
+                                            ),
+                                        }} />
+                                </Grid>          
 
                                 <Grid item xs={12}>
                                     <FormControlLabel
@@ -130,9 +126,12 @@ export function Register( { onChange, onSubmit } ){
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                // color="black"
+                                // color='#82A0AA'
                                 sx={{
                                     mt: 3,
-                                    mb: 2
+                                    mb: 2,
+                                    bgcolor: "#677381"
                                 }}>
                                 전 송
                             </Button>
@@ -146,6 +145,8 @@ export function Register( { onChange, onSubmit } ){
                         </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
+        {/* </form>  */}
+         </ThemeProvider>
+     </> 
     );
 }

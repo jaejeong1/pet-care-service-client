@@ -12,7 +12,7 @@ import axios from 'axios'
 import { createBrowserHistory } from 'history'
 
 
-const SERVER = 'http://127.0.0.1:5000'
+const SERVER = 'http://127.0.0.1:4000'
 const headers = {
     "Content-Type": "application/json",
     Authorization: "JWT fefege...",
@@ -46,6 +46,8 @@ export function* loginSaga() {
 }
 function* signin(action) {
     try {
+
+        // 첫번째는 API, 두번째는 API에 전달할 파라미터
         const response = yield call(loginAPI, action.payload)
         const result = response
             .data
@@ -57,8 +59,14 @@ function* signin(action) {
         yield put({type: LOGIN_FAILURE, payload: error.message})
     }
 }
-const loginAPI = payload => axios.post(
+const loginAPI = payload => axios.get(
     `${SERVER}/user/login`,
+    payload,
+    {headers}
+)
+
+const logoutAPI = payload => axios.get(
+    `${SERVER}/user/logout`,
     payload,
     {headers}
 )
@@ -66,7 +74,7 @@ const loginAPI = payload => axios.post(
 function* logout(){
     try{
         alert(' logout 실행중 ')
-        const response = yield call(logoutAPI)
+        const response = yield call(logoutAPI, action.payload)
         alert(` 로그아웃 성공: ${response.data.message}`)
         yield put({type: LOGOUT_SUCCESS})
         yield put({type: DELETE_TOKEN})
@@ -76,11 +84,7 @@ function* logout(){
         yield put({type: LOGOUT_FAILURE})
     }
 }
-const logoutAPI = () => axios.get(
-    `${SERVER}/user/logout`,
-    {},
-    {headers}
-)
+
 function* loginCancel(action) {
     try {
         console.log(`로그인 취소`)
@@ -110,6 +114,11 @@ const login = handleActions({
         token: ''
     }),
     [LOGOUT_SUCCESS]: (state, _action) => ({
+        ...state,
+        loginUser: null,
+        isLoggined: false
+    }),
+    [LOGOUT_FAILURE]: (state, _action) => ({
         ...state,
         loginUser: null,
         isLoggined: false

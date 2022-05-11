@@ -3,11 +3,18 @@ import {call, delay, put, takeLatest, select, throttle} from 'redux-saga/effects
 import {HYDRATE} from "next-redux-wrapper"
 import axios from 'axios'
 
-const SERVER = 'http://127.0.0.1:5000'
+// const SERVER = 'http://127.0.0.1:5000'
+// const headers = {
+//     "Content-Type": "application/json",
+//     Authorization: "JWT fefege..."
+// }
+const SERVER = 'http://127.0.0.1'
 const headers = {
     "Content-Type": "application/json",
-    Authorization: "JWT fefege..."
+    Authorization: "JWT fefege...",
+    withCredentials: true
 }
+
 export const initialState = {
     isRegistered: false
 }
@@ -32,6 +39,8 @@ export function* registerSaga() {
 function* signup(action) {
     try {
         const response = yield call(registerAPI, action.payload)
+        console.log("response", response)
+        console.log("response", response.data)
         console.log(" 회원가입 서버다녀옴: " + JSON.stringify(response.data))
         yield put({type: REGISTER_SUCCESS, payload: response.data})
         //put이니까 리덕스에 데이터 보내라.
@@ -40,7 +49,22 @@ function* signup(action) {
         yield put({type: REGISTER_FAILURE, payload: error.message})
     }
 }
-const registerAPI = payload => axios.post(`${SERVER}/user/join`, payload, {headers})
+
+// const registerAPI = payload => axios.post(`${SERVER}/user/join`, payload, {headers})
+
+
+
+// TODO: API는 이렇게 매핑
+
+const registerAPI = payload => axios.post(
+    `${SERVER}/user/join`,
+    payload,
+    {headers}
+)
+
+
+
+
 
 function* membershipWithdrawal(action) {
     try {

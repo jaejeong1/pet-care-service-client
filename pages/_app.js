@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import '@/styles/globals.css'
-import {Footer, Header, Nav} from "@/components";
+import {Header, Nav, Sidenav} from "@/components";
 import {wrapper} from "@/modules/store";
 import withReduxSaga from 'next-redux-saga';
 
 const App = ({Component}) => {
-    return <> < Header /> <Nav/>
+    return <> 
+    < Header /> 
+    <Nav/> 
+    {/* <Sidenav/> */}
     <div className='AppMinHeight'>
         <Component/>
     </div>
-    <Footer/>
 </>
 }
 App.propTypes = {

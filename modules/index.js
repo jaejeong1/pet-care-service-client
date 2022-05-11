@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import counter, { counterSaga } from './basic/counter';
+import counter, { counterSaga } from './basic/model';
 import register, { registerSaga } from './auth/register';
 import login, { loginSaga } from './auth/login';
 import {HYDRATE} from "next-redux-wrapper"
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     register,
 });
 export function* rootSaga() {
-  yield all([counterSaga(), counterSaga, registerSaga(), loginSaga()]);
+  yield all([counterSaga(), messageReducer(), registerSaga(), loginSaga()]);
 }
 
 export default rootReducer;

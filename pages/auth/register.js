@@ -5,16 +5,21 @@ import { Register } from '@/components';
 
 const RegisterPage = () => {
     const [user, setUser] =useState({
-        userid:'', password:'', email:'', name:'', phone:'', birth:'', address:''
+        email:'', name:'', password:''
     })
     const dispatch = useDispatch()
     const onChange = e =>{
         e.preventDefault()
         const{name, value} = e.target;
-        setUser({...user,[name]: value})
+        console.log("name", name)
+        // console.log("e", e.target)
+        // setUser({...user,[name]: value})
+        setUser({...user, [name]: value})
+        console.log("user1", user)
     }
     const onSubmit = e => {
         e.preventDefault()
+        console.log("user2", user)
         alert('회원가입정보: '+JSON.stringify(user))
         dispatch(registerRequest(user))
     }

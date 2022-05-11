@@ -1,4 +1,4 @@
-import {increaseAsync, decreaseAsync} from '@/modules/basic/counter';
+import {increaseAsync, decreaseAsync} from '@/modules/basic/model';
 import {Counter} from '@/components';
 import React, {useState, useEffect} from 'react'
 import AppBar from '@mui/material/AppBar';

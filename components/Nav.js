@@ -25,9 +25,9 @@ const HomeIcon = createSvgIcon(
 const basicSettings = {
     subTitles: [
         // '반려견 홈케어 서비스',
-        '모델', '메세지', '게시판'
+        '모델', '메세지', '영상제작'
     ],
-    urls: ["/basic/counter", "/basic/calc", "/basic/bmi", '/board/list']
+    urls: ["/basic/model", "/basic/message", "/basic/bmi", '/board/list']
 };
 
 const align = createTheme({
@@ -75,9 +75,9 @@ export function Nav() {
         if (loginUser === null) {
             setUserUrls({
                 subTitles: [
-                    '회원가입', '로그인'
+                    '회원가입', '로그인', '로그아웃'
                 ],
-                urls: ["/auth/register", "/auth/login"]
+                urls: ["/auth/register", "/auth/login",  "/auth/logout"]
             })
             setImageInfos({
                 imageUrl: 'https://as2.ftcdn.net/v2/jpg/01/85/61/65/1000_F_185616556_uCc1J5d5GNfRH6ErgP1G' +
@@ -104,10 +104,11 @@ export function Nav() {
                 backgroundColor: "#000000"
                 // marginBottom: "20px"
             }}>
-            <Container maxWidth="xl">
+            {/* <Container maxWidth="xl"> */}
                 <Toolbar disableGutters="disableGutters">
                     <Typography
                         // align="right"
+                        // className={classes.title}
                         variant="h6"
                         noWrap="noWrap"
                         component="div"
@@ -119,11 +120,13 @@ export function Nav() {
                             }
                         }}>
                         <Box
+                           
                             sx={{
                                 '& > :not(style)' : {
-                                    m: 2
+                                    m: 10
                                 }
-                            }}>
+                            }}
+                            >
                             <a href='/'><HomeIcon
                                 color="primary"
                                 sx={{
@@ -132,7 +135,7 @@ export function Nav() {
                 display: 'block'
             }}/></a>
                         </Box>
-                    </Typography>
+                      </Typography>
 
                     <Box
                         sx={{
@@ -231,7 +234,7 @@ export function Nav() {
                         </Button>
                     </Box>}
                 </Toolbar>
-            </Container>
+            {/* </Container> */}
         </AppBar>
     );
 }

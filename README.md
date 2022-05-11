@@ -1,3 +1,4 @@
-## 반려견 홈케어 서비스
+### 반려견 홈케어 서비스
 
-![dog1](C:/Users/USERPC/Desktop/딥브레인AI/../../../../../resource/dog1.jpgdog1.PNG)
+![dog1](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FxW1ru%2FbtrBsvEjLXq%2FWBpdklibgik3MHF67y9iC0%2Fimg.png)
+
