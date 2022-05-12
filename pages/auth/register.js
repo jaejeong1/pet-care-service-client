@@ -12,7 +12,7 @@ const RegisterPage = () => {
         e.preventDefault()
         const{name, value} = e.target;
         console.log("name", name)
-        // console.log("e", e.target)
+        console.log("vlaue", value)
         // setUser({...user,[name]: value})
         setUser({...user, [name]: value})
         console.log("user1", user)

@@ -42,8 +42,7 @@ export function Nav() {
 
     const dispatch = useDispatch()
     const [imageInfos, setImageInfos] = useState({
-        imageUrl: 'https://as2.ftcdn.net/v2/jpg/01/85/61/65/1000_F_185616556_uCc1J5d5GNfRH6ErgP1G' +
-                '8x8ORLeG25en.jpg',
+        imageUrl: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUg38c%2FbtrBLGyUiyO%2FlUMdQ6sjD96kFkKbpW8J10%2Fimg.png',
         imageTitle: 'sign'
     });
     const [userUrls, setUserUrls] = useState({subTitles: [], urls: []});
@@ -80,8 +79,7 @@ export function Nav() {
                 urls: ["/auth/register", "/auth/login",  "/auth/logout"]
             })
             setImageInfos({
-                imageUrl: 'https://as2.ftcdn.net/v2/jpg/01/85/61/65/1000_F_185616556_uCc1J5d5GNfRH6ErgP1G' +
-                        '8x8ORLeG25en.jpg',
+                imageUrl: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUg38c%2FbtrBLGyUiyO%2FlUMdQ6sjD96kFkKbpW8J10%2Fimg.png',
                 imageTitle: 'sign'
             })
         } else {

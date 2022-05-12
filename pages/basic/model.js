@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch, connect } from 'react-redux';
-import { modelselect1 } from '@/modules/basic/model';
+import { modelSelect, modelSelectFailure } from '@/modules/basic/model';
 import { Model } from '@/components';
 
 const ModelPage = () => {
@@ -8,23 +8,27 @@ const ModelPage = () => {
        model:''
     })
     const dispatch = useDispatch()
-    const onChange = e =>{
+    // const onChange = e =>{
+    //     e.preventDefault()
+    //     const{model, value} = e.target;
+    //     console.log("model", model)
+    //     setModelList({...modelList, [model]: value})
+    // }
+
+    const {model, modelSelected} = useSelector(state => state.model)
+    const onSubmit = e => {
         e.preventDefault()
         const{model, value} = e.target;
         console.log("model", model)
         setModelList({...modelList, [model]: value})
-    }
-
-    const onSubmit = e => {
-        e.preventDefault()
-        dispatch(modelselect1(modelList))
+        dispatch(modelSelect(modelList))
     }
   return (
     <Model onChange={onChange} onSubmit={onSubmit}  />
   );
 };
 
-const mapStateToProps = state => ({model: state.model})
-const modelSelectActions = {modelselect1}
+const mapStateToProps = state => ({modelSelected: state.model.modelSelected})
+const modelSelectActions = {modelSelect}
 
 export default connect(mapStateToProps, modelSelectActions)(ModelPage)
