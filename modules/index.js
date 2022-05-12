@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import counter, { counterSaga } from './basic/model';
+import model, { modelselectSaga } from './basic/model';
 import register, { registerSaga } from './auth/register';
 import login, { loginSaga } from './auth/login';
 import {HYDRATE} from "next-redux-wrapper"
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
                 return state;
         }
     },
-    counter,
+    model,
     login,
     register,
 });
