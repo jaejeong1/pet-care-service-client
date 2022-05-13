@@ -1,175 +1,132 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import LocalDrinkTwoToneIcon from '@material-ui/icons/LocalDrinkTwoTone';
-import OutdoorGrillTwoToneIcon from '@material-ui/icons/OutdoorGrillTwoTone';
-import Typography from '@mui/material/Typography';
-import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
-import EmojiEmotionsTwoToneIcon from '@material-ui/icons/EmojiEmotionsTwoTone';
-import ToysTwoToneIcon from '@material-ui/icons/ToysTwoTone';
-import EventSeatTwoToneIcon from '@material-ui/icons/EventSeatTwoTone';
-import ChildCareTwoToneIcon from '@material-ui/icons/ChildCareTwoTone';
-import PanToolTwoToneIcon from '@material-ui/icons/PanToolTwoTone';
-import PetsTwoToneIcon from '@material-ui/icons/PetsTwoTone';
-import { Modal, Pagination, Table } from '@/components'
-
-import FilledInput from '@material-ui/core/FilledInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import Box from '@mui/material/Box';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
+import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
+import MovieIcon from '@material-ui/icons/Movie';
 
+function Copyright(props) {
+    return (
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            {'Copyright © '}
+            {/* TODO: 링크 주소 추후 수정 */}
+            <Link color="inherit" href="https://mui.com/"> 
+                Pet Care Service
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '33%',
-    maxWidth: 360,
-    marginTop: 30, 
-    marginLeft: 50,
-    marginRight: 50,  
-    display: "inline-block",
-    backgroundColor: theme.palette.background.paper,
-  },
-  root2: {
-    width: '100%',
-    marginTop: 70, 
-    marginLeft: 50,
-    marginRight: 50,  
-    marginBottom: 70,
-    display: "inline-block",
-    backgroundColor: theme.palette.background.paper,
-  },
-  root3: {
-    width: '100%',
-    marginTop: 50, 
-    // marginLeft: 50,
-    // marginRight: 50,  
-    // display: "inline-block",
-    backgroundColor: theme.palette.background.paper,
-  },
-  root4: {
-    width: '100%',
-    marginTop: 70, 
-    marginLeft: 50,
-    marginRight: 50,  
-    marginBottom: 70,
-    align: "center",
-    backgroundColor: theme.palette.background.paper,
-  },
-  style: {
-    display:"inline-block",
-    margin:'100px',
-   
-},
-root5: {
-  width: '100%',
-  backgroundColor: theme.palette.background.paper,
-},
+const theme = createTheme();
 
-}));
-
-export function Send() {
-  const classes = useStyles();
-  
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  const handleListItemClick = (event, index) => {
-    console.log("버튼클릭")
-    setSelectedIndex(index);
-  };
-
-  return (
-    <>
-    <Box>
-     <Typography
-              component="h1"
-              variant="h3"
-              align="center"
-              color="text.primary"
-            //   gutterBottom
-            >
-           Send Your Scene
-    </Typography>
-    </Box>
-    <Box
+export function Send({onChange, onSubmit}) {
+    return (
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline/>
+                <Box
                     sx={{
-                        // mt: 3,
-                        // display: 'flex',
-                        // flexDirection: 'column',
-                        // alignItems: 'left',
-                        marginTop: 10,
-                        marginLeft: 20,
-                        marginRight: 20
-                    }}
-                    display="flex" justifyContent="center" m={1} p={1}
-                    >   
-            <TextField
-            //   sx={{
-                // mt: 3,
-                // display: 'flex',
-                // flexDirection: 'column',
-                // align: 'center'}}
-               id="filled-full-width"
-              label="Write Your petName"
-            //   style={{ margin: 8 }}
-            //   multiline
-              // rows={4}
-            //   fullWidth
-            //   margin="normal"
-              // defaultValue="추가메세지를 입력하세요"
-            //   variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }}
-             
-        />
-         </Box>
-            <Box
+                        mt: 8,
+                        mb: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                    <Avatar
+                        sx={{
+                            m: 2,
+                            bgcolor: '#677381'
+                        }}>
+                        <MovieIcon/>
+                    </Avatar>
+                    <Typography component="h1" variant="h4" gutterBottom>
+                        Send Your Scene
+                    </Typography>
+                    <Box
+                        component="form"
+                        onSubmit={onSubmit}
+                        noValidate="noValidate"
+                        sx={{
+                            // mt: 1
+                        }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="petname"
+                            label="write your petname"
+                            name="petname"
+                            autoComplete="userid"
+                            autoFocus
+                            onChange={onChange}
+                          //   InputProps={{
+                          //   startAdornment: (
+                          //   <InputAdornment position="start">
+                          //       <PersonOutlineOutlinedIcon />
+                          //   </InputAdornment>
+                          //   ),
+                          // }}
+                          />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="email"
+                            label="email"
+                            id="email"
+                            // autoComplete="current-password"
+                            onChange={onChange}
+                             />
+
+                        <Button
+                            type="submit"
+                            fullWidth 
+                            variant="contained"
+                            sx={{
+                                mt: 2,
+                                mb: 1,
+                                bgcolor: '#677381'
+                            }}>
+                           전송
+                        </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                {/* <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link> */}
+                            </Grid>
+                            <Grid item>
+                                <Link 
+                                sx={{
+                                    marginTop: 2,     
+                                    color: '#677381'
+                                }}
+                                href="/basic/message" variant="body2">
+                                    {"More change Message?"}
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Box>
+                <Copyright
                     sx={{
-                        // mt: 3,
-                        // display: 'flex',
-                        // flexDirection: 'column',
-                        // alignItems: 'left',
-            
-                        marginTop: 10,
-                        marginBottom: 20,
-                        marginLeft: 20,
-                        marginRight: 20
-                    }}
-                    >   
-            <TextField
-            //   sx={{
-                // mt: 3,
-                // display: 'flex',
-                // flexDirection: 'column',
-                // align: 'center'}}
-               id="filled-full-width"
-              label="Email"
-            //   style={{ margin: 8 }}
-            //   multiline
-              // rows={4}
-              fullWidth
-            //   margin="normal"
-              // defaultValue="추가메세지를 입력하세요"
-              variant="filled"
-              InputLabelProps={{
-                shrink: true,
-              }}
-             
-        />
-        {/* <Button sx={{mt:4}} size="large" justifyContent="center" type="submit" color="primary" variant="contained">전송</Button>   */}
-        <Box display="flex" justifyContent="center" m={1} p={1}>
-        {/* <Button variant="contained" color="secondary">Secondary</Button> */}
-        <Button size="large" type="submit" color="primary" variant="contained">전송</Button>              
-        </Box> 
-        </Box> 
-    </>
-  );
+                        mt: 14,
+                        mb: 4
+                    }}/>
+            </Container>
+        </ThemeProvider>
+    );
 }

@@ -87,7 +87,7 @@ export function Message() {
 
   return (
    
-    <div className={classes.root5}>
+   <>
      <div className={classes.root3}>
      <Typography
               component="h1"
@@ -154,7 +154,7 @@ export function Message() {
       <ListItem
         button
         selected={selectedIndex === 1}
-        onClick={(event) => handleListItemClick(event, 1)}
+        // onClick={(event) => handleListItemClick(event, 1)}
       >
         <ListItemIcon>
           <PetsTwoToneIcon />
@@ -211,7 +211,6 @@ export function Message() {
   </div>
 
   <div className={classes.root3}>
-
      <Typography
               component="h1"
               variant="h3"
@@ -224,16 +223,13 @@ export function Message() {
     {/* <div className={classes.root3}> */}
             {/* <div className={classes.root4}>  */}   
             <Box
-                    sx={{
-                        mt: 3,
-                        // display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        // marginBottom: 20,
-                        marginLeft: 20,
-                        marginRight: 20
-                    }}
-                    >
+              sx={{
+                marginTop: 10,
+                marginBottom: 20,
+                marginLeft: 20,
+                marginRight: 20
+              }}
+              >
           
             <TextField
               id="outlined-full-width"
@@ -244,15 +240,14 @@ export function Message() {
               fullWidth
               // margin="normal"
               // defaultValue="추가메세지를 입력하세요"
-              variant="outlined"
-        />
-       </Box>
-       <Box sx={{display: 'inline-block'}}>
+              variant="filled"
+          />
+          <Box display="flex" justifyContent="right" m={1} p={1}>
         {/* <Button variant="contained" color="secondary">Secondary</Button> */}
-        <Button type="submit" color="primary"   variant="contained">추가</Button>
-        <Button type="submit"  color="primary"  variant="contained">변경</Button>                  
-        </Box> 
-    
+            <Button type="submit" color="primary"   variant="contained">추가</Button>
+            <Button type="submit"  color="primary"  variant="contained">변경</Button>                  
+          </Box> 
+      </Box> 
       {/* </div> */}
             {/* <FormControl fullWidth variant="filled">
           <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
@@ -266,6 +261,6 @@ export function Message() {
         </FormControl> */}
         {/* </div>  */}
     </div>
-  </div>
+    </>
   );
 }

@@ -1,47 +1,94 @@
-import { createAction, handleActions } from 'redux-actions';
-import { delay, put, takeLatest, select, throttle } from 'redux-saga/effects';
+import {createAction, handleActions} from 'redux-actions';
+import {call, delay, put, takeLatest, select, throttle} from 'redux-saga/effects';
+import {HYDRATE} from "next-redux-wrapper"
+import axios from 'axios'
 
-const INCREASE = 'counter/INCREASE';
-const DECREASE = 'counter/DECREASE';
-const INCREASE_ASYNC = 'counter/INCREASE_ASYNC';
-const DECREASE_ASYNC = 'counter/DECREASE_ASYNC';
-
-export const increase = createAction(INCREASE);
-export const decrease = createAction(DECREASE);
-// 마우스 클릭 이벤트가 payload 안에 들어가지 않도록 () => undefined 를 두번째 파라미터로 넣어줍니다.
-export const increaseAsync = createAction(INCREASE_ASYNC, () => undefined);
-export const decreaseAsync = createAction(DECREASE_ASYNC, () => undefined);
-
-function* increaseSaga() {
-  yield delay(100); // 1초를 기다립니다.
-  yield put(increase()); // 특정 액션을 디스패치 합니다.
-  const number = yield select(state => state.counter);
-  console.log(`현재 값은 ${number}입니다.`);
+// const SERVER = 'http://127.0.0.1:5000'
+// const headers = {
+//     "Content-Type": "application/json",
+//     Authorization: "JWT fefege..."
+// }
+const SERVER = 'http://127.0.0.1'
+const headers = {
+    "Content-Type": "application/json",
+    Authorization: "JWT fefege...",
+    withCredentials: true
 }
 
-function* decreaseSaga() {
-  yield delay(100); // 1초를 기다립니다.
-  yield put(decrease()); // 특정 액션을 디스패치 합니다.
+export const initialState = {
+    email: '',
+    name:'',
+    isdispatched: false,
+    dispatchError: null
+  }
 }
 
-export function* counterSaga() {
-  // takeEvery 는 들어오는 모든 액션에 대하여 특정 작업을 처리해줍니다.
-  // yield takeEvery(INCREASE_ASYNC, increaseSaga);
-  // 첫번째 파라미터: n초 * 1000
-  yield throttle(700, INCREASE_ASYNC, increaseSaga);
-  // takeLatest 는 만약 기존에 진행중이던 작업이 있다면 취소처리 하고
-  // 가장 마지막으로 실행된 작업만을 수행합니다.
-  yield takeLatest(DECREASE_ASYNC, decreaseSaga);
+const PETDISPATCH_REQUEST = 'basic/PETDISPATCH_REQUEST';
+const PETDISPATCH_SUCCESS = 'basic/PETDISPATCH_SUCCESS';
+const PETDISPATCH_FAILURE = 'basic/PETDISPATCH_FAILURE';
+const EMAILDISPATCH_REQUEST = 'basic/EMAILDISPATCH_REQUEST';
+const EMAILDISPATCH_SUCCESS = 'basic/EMAILDISPATCH_SUCCESS';
+const EMAILDISPATCH_FAILURE = 'basic/EMAILDISPATCH_FAILURE';
+
+
+export const petdispatch = createAction(PETDISPATCH_REQUEST, data => data)
+export const emaildispatch = createAction(EMAILDISPATCH_REQUEST, data => data)
+//위 아래 동일한 코드임.
+// export const registerRequest = data => (
+//     {type: REGISTER_REQUEST, payload: data}
+// )
+export function* dispatchSaga() {
+    yield takeLatest(PETDISPATCH_REQUEST, dispatch);
+    yield takeLatest(EMAILDISPATCH_REQUEST, dispatch);
+}
+function* dispatch(action) {
+    try {
+        const response = yield call(dispatchAPI, action.payload)
+        console.log("response", response)
+        console.log("response", response.data)
+        console.log(" 회원가입 서버다녀옴: " + JSON.stringify(response.data))
+        yield put({type: PETDISPATCH_SUCCESS, payload: response.data})
+        yield put({type: EMAILDISPATCH_SUCCESS, payload: response.data})
+        // TODO: 전송완료페이지 작업후 추가?
+        // yield put(window.location.href = "/auth/login")
+    } catch (error) {
+        yield put({type: PETDISPATCH_FAILURE, payload: error.message})
+        yield put({type: EMAILDISPATCH_FAILURE, payload: error.message})
+    }
 }
 
-const initialState = 0; // 상태는 꼭 객체일 필요 없습니다. 숫자도 작동해요.
+// TODO: API매핑 임시
+const dispatchAPI = payload => axios.post(
+    `${SERVER}/pet`,
+    payload,
+    {headers}
+)
 
-const counterReducer = handleActions(
-  {
-    [INCREASE]: state => state + 1,
-    [DECREASE]: state => state - 1
-  },
-  initialState
-);
 
-export default counterReducer;
+const dispatchReducer = handleActions({
+  [HYDRATE]: (state, action) => ({
+    ...state, 
+    ...action.payload
+  }), 
+
+  [PETDISPATCH_SUCCESS]: (state, action) => ({
+    ...state,
+    name: action.payload,
+    isdispatched: true,
+  }),
+  [PETDISPATCH_FAILURE]: (state, action) => ({
+      ...state,
+      dispatchError: action.payload
+  }),
+  [EMAILDISPATCH_SUCCESS]: (state, action) => ({
+    ...state,
+    email: action.payload,
+    isdispatched: true,
+  }),
+  [EMAILDISPATCH_FAILURE]: (state, action) => ({
+      ...state,
+      dispatchError: action.payload
+  }),
+}, initialState)
+
+export default dispatchReducer

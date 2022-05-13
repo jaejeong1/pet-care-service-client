@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     register,
 });
 export function* rootSaga() {
-  yield all([modelselectSaga(), registerSaga(), loginSaga()]);
+  yield all([modelselectSaga(), dispatchSaga(), registerSaga(), loginSaga()]);
 }
 
 export default rootReducer;
