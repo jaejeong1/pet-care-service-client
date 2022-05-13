@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {Send} from '@/components';
 
-import { petdispatch, emaildispatch } from '@/modules/basic/send';
+import { dispatchRequest } from '@/modules/basic/send';
 
 const SendPage = ({}) => {
 
@@ -22,16 +22,16 @@ const SendPage = ({}) => {
     // const {isdispatched, email, name} = useSelector(state => state.send)
     const onSubmit = e => {
         e.preventDefault()
-        dispatch(petdispatch(send))
-        dispatch(emaildispatch(send))
-      
+        alert('이메일,펫정보: '+JSON.stringify(send))
+        dispatch(dispatchRequest(send))   
     }
+
     return (
         <Send onChange={onChange} onSubmit={onSubmit}  />
         );
     };
-    const mapStateToProps = state => ({ isdispatched: state.send.isdispatched })
-    const dispatchActions = {petdispatch, emaildispatch}
+    const mapStateToProps = state => ({ isdispatched: state.send })
+    const dispatchActions = {dispatchRequest}
     
     export default connect(mapStateToProps, dispatchActions)(SendPage)
     

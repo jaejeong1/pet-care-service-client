@@ -21,25 +21,22 @@ export const initialState = {
     isdispatched: false,
     dispatchError: null
   }
-}
-
-const PETDISPATCH_REQUEST = 'basic/PETDISPATCH_REQUEST';
-const PETDISPATCH_SUCCESS = 'basic/PETDISPATCH_SUCCESS';
-const PETDISPATCH_FAILURE = 'basic/PETDISPATCH_FAILURE';
-const EMAILDISPATCH_REQUEST = 'basic/EMAILDISPATCH_REQUEST';
-const EMAILDISPATCH_SUCCESS = 'basic/EMAILDISPATCH_SUCCESS';
-const EMAILDISPATCH_FAILURE = 'basic/EMAILDISPATCH_FAILURE';
 
 
-export const petdispatch = createAction(PETDISPATCH_REQUEST, data => data)
-export const emaildispatch = createAction(EMAILDISPATCH_REQUEST, data => data)
-//위 아래 동일한 코드임.
-// export const registerRequest = data => (
-//     {type: REGISTER_REQUEST, payload: data}
-// )
+const DISPATCH_REQUEST = 'basic/DISPATCH_REQUEST';
+const DISPATCH_SUCCESS = 'basic/DISPATCH_SUCCESS';
+const DISPATCH_FAILURE = 'basic/DISPATCH_FAILURE';
+// const EMAILDISPATCH_REQUEST = 'basic/EMAILDISPATCH_REQUEST';
+// const EMAILDISPATCH_SUCCESS = 'basic/EMAILDISPATCH_SUCCESS';
+// const EMAILDISPATCH_FAILURE = 'basic/EMAILDISPATCH_FAILURE';
+
+
+export const dispatchRequest = createAction(DISPATCH_REQUEST, data => data)
+// export const emaildispatch = createAction(EMAILDISPATCH_REQUEST, data => data)
+
 export function* dispatchSaga() {
-    yield takeLatest(PETDISPATCH_REQUEST, dispatch);
-    yield takeLatest(EMAILDISPATCH_REQUEST, dispatch);
+    yield takeLatest(DISPATCH_REQUEST, dispatch);
+    // yield takeLatest(EMAILDISPATCH_REQUEST, dispatch);
 }
 function* dispatch(action) {
     try {
@@ -47,13 +44,13 @@ function* dispatch(action) {
         console.log("response", response)
         console.log("response", response.data)
         console.log(" 회원가입 서버다녀옴: " + JSON.stringify(response.data))
-        yield put({type: PETDISPATCH_SUCCESS, payload: response.data})
-        yield put({type: EMAILDISPATCH_SUCCESS, payload: response.data})
+        yield put({type: DISPATCH_SUCCESS, payload: response.data})
+        // yield put({type: EMAILDISPATCH_SUCCESS, payload: response.data})
         // TODO: 전송완료페이지 작업후 추가?
         // yield put(window.location.href = "/auth/login")
     } catch (error) {
-        yield put({type: PETDISPATCH_FAILURE, payload: error.message})
-        yield put({type: EMAILDISPATCH_FAILURE, payload: error.message})
+        yield put({type: DISPATCH_FAILURE, payload: error.message})
+        // yield put({type: EMAILDISPATCH_FAILURE, payload: error.message})
     }
 }
 
@@ -71,24 +68,25 @@ const dispatchReducer = handleActions({
     ...action.payload
   }), 
 
-  [PETDISPATCH_SUCCESS]: (state, action) => ({
+  [DISPATCH_SUCCESS]: (state, action) => ({
     ...state,
     name: action.payload,
-    isdispatched: true,
-  }),
-  [PETDISPATCH_FAILURE]: (state, action) => ({
-      ...state,
-      dispatchError: action.payload
-  }),
-  [EMAILDISPATCH_SUCCESS]: (state, action) => ({
-    ...state,
     email: action.payload,
     isdispatched: true,
   }),
-  [EMAILDISPATCH_FAILURE]: (state, action) => ({
+  [DISPATCH_FAILURE]: (state, action) => ({
       ...state,
       dispatchError: action.payload
   }),
+  // [EMAILDISPATCH_SUCCESS]: (state, action) => ({
+  //   ...state,
+  //   email: action.payload,
+  //   isdispatched: true,
+  // }),
+  // [EMAILDISPATCH_FAILURE]: (state, action) => ({
+  //     ...state,
+  //     dispatchError: action.payload
+  // }),
 }, initialState)
 
 export default dispatchReducer

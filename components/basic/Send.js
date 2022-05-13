@@ -68,7 +68,7 @@ export function Send({onChange, onSubmit}) {
                             fullWidth
                             id="petname"
                             label="write your petname"
-                            name="petname"
+                            name="name"
                             autoComplete="userid"
                             autoFocus
                             onChange={onChange}
@@ -94,6 +94,7 @@ export function Send({onChange, onSubmit}) {
                         <Button
                             type="submit"
                             fullWidth 
+                            onClick={onSubmit}
                             variant="contained"
                             sx={{
                                 mt: 2,
