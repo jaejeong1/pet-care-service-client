@@ -3,7 +3,7 @@ import { delay, put, takeLatest, select, throttle } from 'redux-saga/effects';
 
 
 
-//TODO: 4000으로 추후수정
+//TODO: 작업진행중, 미완성
 const SERVER = 'http://127.0.0.1:4000'
 const headers = {
     "Content-Type": "application/json",

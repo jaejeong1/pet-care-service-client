@@ -25,9 +25,9 @@ const HomeIcon = createSvgIcon(
 const basicSettings = {
     subTitles: [
         // '반려견 홈케어 서비스',
-        '모델', '메세지', '영상제작'
+        '모델', '메세지', '이메일전송', '', '영상링크'
     ],
-    urls: ["/basic/model", "/basic/message", "/basic/send", '/board/list']
+    urls: ["/basic/model", "/basic/message", "/basic/send", "/basic/scene", "/basic/scenelink"]
 };
 
 const align = createTheme({

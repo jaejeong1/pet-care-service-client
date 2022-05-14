@@ -46,8 +46,7 @@ function* dispatch(action) {
         console.log(" 회원가입 서버다녀옴: " + JSON.stringify(response.data))
         yield put({type: DISPATCH_SUCCESS, payload: response.data})
         // yield put({type: EMAILDISPATCH_SUCCESS, payload: response.data})
-        // TODO: 전송완료페이지 작업후 추가?
-        // yield put(window.location.href = "/auth/login")
+        // yield put(window.location.href = "/basic/scenelink")
     } catch (error) {
         yield put({type: DISPATCH_FAILURE, payload: error.message})
         // yield put({type: EMAILDISPATCH_FAILURE, payload: error.message})

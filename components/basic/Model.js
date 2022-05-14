@@ -238,9 +238,9 @@ const infos = [
                        {info.body}
                     </Typography>
                   </CardContent>
-                  <Box component="form" onSubmit={() => onSubmit} noValidate="noValidate" sx={{ mt: 1 }} >
+                  <Box component="form" noValidate="noValidate" sx={{ mt: 1 }} >
                   <CardActions sx={{float: 'right'}}>
-                    <Button  value={info.model} type="submit" variant="contained" color="primary" onChange={onChange}>Confirm</Button>
+                    <Button  value={info.model} type="submit" variant="contained" color="primary" onClick={onSubmit}>Confirm</Button>
                   </CardActions>
                   </Box>
                 </Card>

@@ -4,7 +4,7 @@ import {Send} from '@/components';
 
 import { dispatchRequest } from '@/modules/basic/send';
 
-const SendPage = ({}) => {
+const ScenePage = ({}) => {
 
     const [send, setSend] = useState({name: '', email: ''})
     const dispatch = useDispatch()
@@ -23,8 +23,7 @@ const SendPage = ({}) => {
     const onSubmit = e => {
         e.preventDefault()
         alert('이메일,펫정보: '+JSON.stringify(send))
-        dispatch(dispatchRequest(send))
-        dispatch(window.location.href = "/basic/scenelink")
+        dispatch(dispatchRequest(send))   
     }
 
     return (
@@ -34,5 +33,5 @@ const SendPage = ({}) => {
     const mapStateToProps = state => ({ isdispatched: state.send })
     const dispatchActions = {dispatchRequest}
     
-    export default connect(mapStateToProps, dispatchActions)(SendPage)
+    export default connect(mapStateToProps, dispatchActions)(ScenePage)
     

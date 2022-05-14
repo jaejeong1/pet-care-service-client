@@ -95,6 +95,7 @@ export function Send({onChange, onSubmit}) {
                             type="submit"
                             fullWidth 
                             onClick={onSubmit}
+                            // href='/basic/scenelink'
                             variant="contained"
                             sx={{
                                 mt: 2,
@@ -116,7 +117,7 @@ export function Send({onChange, onSubmit}) {
                                     color: '#677381'
                                 }}
                                 href="/basic/message" variant="body2">
-                                    {"More change Message?"}
+                                    "More change Message?"
                                 </Link>
                             </Grid>
                         </Grid>

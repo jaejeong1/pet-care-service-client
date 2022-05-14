@@ -2,7 +2,7 @@ import {increaseAsync, decreaseAsync} from '@/modules/basic/model';
 import {connect} from 'react-redux';
 import {Message} from '@/components';
 
-
+//TODO: 작업진행중, 미완성
 const MessagePage = ({number, increaseAsync, decreaseAsync}) => {
 
     return (

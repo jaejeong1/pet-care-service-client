@@ -17,7 +17,9 @@ const ModelPage = () => {
     const onSubmit = e => {
         e.preventDefault()
         console.log("modelList", modelList)
+        setModelList({...modelList, model: e.target.value})
         dispatch(modelSelect(modelList))
+        dispatch(window.location.href = "/basic/message")
     }
   return (
     <Model onChange={onChange} onSubmit={onSubmit}  />
