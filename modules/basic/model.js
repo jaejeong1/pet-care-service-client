@@ -8,6 +8,7 @@ const headers = {
     Authorization: "JWT fefege..."
 }
 export const initialState = {
+   model: '',
    modelSelected: false,
 }
 

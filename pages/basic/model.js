@@ -9,22 +9,21 @@ const ModelPage = ({}) => {
     })
 
     const dispatch = useDispatch()
-    const model_name = ['ysy', 'kang', 'jonadan_ces', 'haylyn', 'khw', 'leetaeyeon']
+    // const model_name = ['ysy', 'kang', 'jonadan_ces', 'haylyn', 'khw', 'leetaeyeon']
     
-    // const {model, modelSelected} = useSelector(state => state.model)
+    const { model } = useSelector(state => state.model)
     const onSubmit = (e) => {
        e.preventDefault()
         const { value } = e.target;
         console.log("value", value)
         // console.log("모델네임", model_name[value])
-        setTimeout(() => setModelList({...modelList, model: value}), 3000);
-        // setModelList({...modelList, model: value})
+        setModelList({...modelList, model: value})
         console.log("modelList", modelList)
         dispatch(modelSelect(modelList))
-        // dispatch(window.location.href = "/basic/message")
+        dispatch(window.location.href = "/basic/message")
     }
   return (
-    <Model onSubmit={onSubmit}  />
+    <Model model={model} onSubmit={onSubmit}  />
   );
 };
 

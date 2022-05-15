@@ -9,8 +9,7 @@ import OutdoorGrillTwoToneIcon from '@material-ui/icons/OutdoorGrillTwoTone';
 import Typography from '@mui/material/Typography';
 import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
 import EmojiEmotionsTwoToneIcon from '@material-ui/icons/EmojiEmotionsTwoTone';
-import ToysTwoToneIcon from '@material-ui/icons/ToysTwoTone';
-import EventSeatTwoToneIcon from '@material-ui/icons/EventSeatTwoTone';
+import Link from '@mui/material/Link';
 import ChildCareTwoToneIcon from '@material-ui/icons/ChildCareTwoTone';
 import PanToolTwoToneIcon from '@material-ui/icons/PanToolTwoTone';
 import PetsTwoToneIcon from '@material-ui/icons/PetsTwoTone';
@@ -20,7 +19,23 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Divider from '@material-ui/core/Divider';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 
+function Copyright() {
+
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Pet Care Service
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const theme = createTheme();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,29 +44,34 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 50,
     marginRight: 50,  
     marginBottom: 70,
-    // display: "flex",
+    position: "relative",
     // backgroundColor: theme.palette.background.paper,
   },
   
   root2: {
     width: '100%',
-    maxWidth: 360,
-    // marginTop: 30, 
-    // marginLeft: 70,
-    // marginRight: 70,  
-    // alignItems: 'center'
-    // display: "inline-block",
+    // display: 'inline-block',
+    // display: "flex",
+    // flexDirection: "column",
+    // marginBottom: 50,
+    // position: "relative",
+    // display: "block",
     backgroundColor: theme.palette.background.paper,
   },
 
-  // style: {
-  //   display:"inline-block",
-  //   margin:'100px',   
-  // },
+  root3: {
+    width: '100%',
+    marginTop: 50, 
+    marginLeft: 50,
+    marginRight: 50,  
+    marginBottom: 50,
+    backgroundColor: theme.palette.background.paper,
+  },
 
   margin: {
+    textAlign: "center",
     marginBottom:30
-  }
+  },
 
 }));
 
@@ -68,19 +88,20 @@ export function Message() {
   };
 
   return (   
-  <>
-     <Box className={classes.root}>
-        {/* <Box
+  <ThemeProvider theme={theme}>
+  <main>
+     {/* <Box className={classes.root}> */}
+        <Box
             sx={{
-                mt: 6,
-                mb: 2,
-                // display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
-            }}> */}
+              width: '100%',
+              marginTop: 10, 
+              marginLeft: 5,
+              marginRight: 5,  
+              marginBottom: 10,
+            }}>
           <Typography
                   component="h1"
-                  variant="h3"
+                  variant="h2"
                   align="center"
                   color="text.primary"
                   gutterBottom
@@ -92,17 +113,28 @@ export function Message() {
           </Typography>
         {/* </Box> */}
       </Box>
-  {/* <div className={classes.root}> */}
+      <Box sx={{
+                      mb: 10,
+                      // mt: 10,
+                      ml: 10,
+                      mr: 5
+                      // width: '30%',
+                      // align: 'center',
+                      // display: 'inline-block',
+                      // flexDirection: 'column',
+                      // verticalAlign: "middle", 
+                  }}>
     <Box  component="form"  
               // onSubmit={onSubmit}
               noValidate="noValidate"
               sx={{
-                  // mt: 6,
-                  // mb: 2,
-                  // width: '100%',
-                  // display: 'inline-block',
-                  flexDirection: 'column',
-                  alignItems: 'center'
+                  mr: 2,
+                  ml: 2,
+                  width: '30%',
+                  align: 'center',
+                  display: 'inline-block',
+                  // flexDirection: 'column',
+                  // verticalAlign: "middle", 
               }}
               >
       <List className={classes.root2} component="nav" aria-label="main mailbox folders">
@@ -138,7 +170,20 @@ export function Message() {
           <ListItemText align="right" primary="간식 먹자" />
         </ListItem>
       </List>
-   
+      </Box>
+
+      <Box
+       component="form"  
+              // onSubmit={onSubmit}
+              noValidate="noValidate"
+              sx={{
+                  mr: 2,
+                  ml: 2,
+                  width: '30%',
+                  display: 'inline-block',
+                  // flexDirection: 'column',
+                  // alignItems: 'center'
+              }}>
       <List className={classes.root2} component="nav" aria-label="main mailbox folders">
       <h1 align="center"className={classes.margin}>놀이:Play</h1>
         <ListItem
@@ -172,7 +217,20 @@ export function Message() {
         <ListItemText align="right" primary="손" />
         </ListItem>
       </List>
-    
+    </Box>
+
+    <Box
+          component="form"  
+          // onSubmit={onSubmit}
+          noValidate="noValidate"
+          sx={{
+              mr: 2,
+              ml: 2,
+              width: '30%',
+              display: 'inline-block',
+              // flexDirection: 'column',
+              // alignItems: 'center'
+          }}>
       <List className={classes.root2} component="nav" aria-label="main mailbox folders">
       <h1 align="center" className={classes.margin}>감정:Emotion</h1>
         <ListItem
@@ -206,18 +264,27 @@ export function Message() {
         <ListItemText align="right" primary="사랑해" />
         </ListItem>
       </List>
+      </Box> 
     </Box>
-  {/* </div> */}
   
   <Divider />
 
-  <div className={classes.root}>
+  <Box sx={{
+              width: '100%',
+              marginTop: 10, 
+              marginLeft: 5,
+              marginRight: 5,  
+              // fontWeight: 400
+              // marginBottom: 7, 
+              }}
+              >     
      <Typography
               component="h1"
-              variant="h3"
+              variant="h2"
               align="center"
               color="text.primary"
               gutterBottom
+              // fontWeight="bold"
             >
       Add More Message
       </Typography> 
@@ -263,19 +330,11 @@ export function Message() {
             </Button>                 
         </Box> 
       </Box> 
-    {/* </div> */}
-          {/* <FormControl fullWidth variant="filled">
-        <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
-        <FilledInput
-          id="filled-adornment-amount"
-          // label="Message"
-          // value={values.amount}
-          // onChange={handleChange('amount')}
-          startAdornment={<InputAdornment position="start"></InputAdornment>}
-        />
-      </FormControl> */}
-      {/* </div>  */}
-  </div>
- </>
+    </Box>
+  </main>
+    <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">   
+          <Copyright />
+    </Box>
+  </ThemeProvider> 
   );
 }

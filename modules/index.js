@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import model, { modelselectSaga } from './basic/model';
+import message, { messageSaga } from './basic/message';
 import register, { registerSaga } from './auth/register';
 import login, { loginSaga } from './auth/login';
 import dispatch, { dispatchSaga } from './basic/send';
@@ -17,13 +18,14 @@ const rootReducer = combineReducers({
         }
     },
     model,
+    message,
     dispatch,
     linkRequest,
     login,
     register,
 });
 export function* rootSaga() {
-  yield all([modelselectSaga(), dispatchSaga(), linkRequestSaga(), registerSaga(), loginSaga()]);
+  yield all([modelselectSaga(), dispatchSaga(), messageSaga(), linkRequestSaga(), registerSaga(), loginSaga()]);
 }
 
 export default rootReducer;

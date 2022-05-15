@@ -109,7 +109,7 @@ const sceneAPI = payload => axios.post(
   {headers}
 )
 
-export function* messageSaga1() {
+export function* messageSaga() {
   yield takeLatest(FOOD1, food1Saga);
   yield takeLatest(FOOD2, food2Saga);
   yield takeLatest(FOOD3, food3Saga);
