@@ -8,7 +8,6 @@ const headers = {
     Authorization: "JWT fefege..."
 }
 export const initialState = {
-   model: '',
    modelSelected: false,
 }
 
@@ -17,7 +16,7 @@ const MODELSELECT = 'basic/MODELSELECT';
 const MODELSELECT_FAILURE = 'basic/MODELSELECT_FAILURE';
 const MODELSELECT_SUCCESS = 'basic/MODELSELECT_SUCCESS';
 
-export const modelSelect = createAction(MODELSELECT, data=> data);
+export const modelSelect = createAction(MODELSELECT, data => data);
 // export const modelSelectFailure = createAction(MODELSELECT_FAILURE, data=> data);
 
 export function* modelselectSaga() {

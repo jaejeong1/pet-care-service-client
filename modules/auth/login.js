@@ -44,10 +44,9 @@ export function* loginSaga() {
     yield takeLatest(LOGIN_CANCELLED, loginCancel);
     yield takeLatest(LOGOUT_REQUEST, logout);
 }
+
 function* signin(action) {
     try {
-
-        // 첫번째는 API, 두번째는 API에 전달할 파라미터
         const response = yield call(loginAPI, action.payload)
         const result = response
             .data
@@ -59,7 +58,7 @@ function* signin(action) {
         yield put({type: LOGIN_FAILURE, payload: error.message})
     }
 }
-const loginAPI = payload => axios.get(
+const loginAPI = payload => axios.post(
     `${SERVER}/user/login`,
     payload,
     {headers}
@@ -67,25 +66,25 @@ const loginAPI = payload => axios.get(
 
 const logoutAPI = payload => axios.get(
     `${SERVER}/user/logout`,
-    payload,
+    {},
     {headers}
 )
 
 function* logout(){
     try{
-        alert(' logout 실행중 ')
-        const response = yield call(logoutAPI, action.payload)
-        alert(` 로그아웃 성공: ${response.data.message}`)
+        console.log(' logout 실행중 ')
+        const response = yield call(logoutAPI)
+        console.log(` 로그아웃 성공: ${response.data.message}`)
         yield put({type: LOGOUT_SUCCESS})
         yield put({type: DELETE_TOKEN})
-        yield put(window.location.href= "/")
+        // yield put(window.location.href= "/")
     }catch(error){
         console.log(` 로그아웃 실패: ${error}`)
         yield put({type: LOGOUT_FAILURE})
     }
 }
 
-function* loginCancel(action) {
+function* loginCancel() {
     try {
         console.log(`로그인 취소`)
     } catch (error) {}
@@ -109,7 +108,7 @@ const login = handleActions({
         ...state,
         token: action.payload
     }),
-    [DELETE_TOKEN]: (state, action) => ({
+    [DELETE_TOKEN]: (state, _action) => ({
         ...state,
         token: ''
     }),
@@ -120,35 +119,9 @@ const login = handleActions({
     }),
     [LOGOUT_FAILURE]: (state, _action) => ({
         ...state,
-        loginUser: null,
-        isLoggined: false
+        loginUser: action.payload,
+        isLoggined: true
     }),
 }, initialState)
-/**
-const login = (state = initialState, action) => {
-    switch (action.type) {
-        case HYDRATE:
-            console.log(' ### HYDRATE Issue 발생 ### ')
-            return {
-                ...state,
-                ...action.payload
-            }
-        case LOGIN_SUCCESS:
-            alert(' ### 사가 로그인 성공 ### ' + JSON.stringify(action.payload))
-            return {
-                ...state,
-                loginUser: action.payload,
-                isLoggined: true
-            }
-        case LOGIN_FAILURE:
-            console.log(' ### 로그인 실패 ### ' + action.payload)
-            return {
-                ...state,
-                loginUser: action.payload
-            }
-        default:
-            return state;
-    }
-}
- */
+
 export default login

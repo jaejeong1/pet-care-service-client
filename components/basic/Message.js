@@ -63,7 +63,7 @@ export function Message() {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleListItemClick = (event, index) => {
-    console.log("버튼클릭")
+    console.log("버튼클릭", index)
     setSelectedIndex(index);
   };
 

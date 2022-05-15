@@ -3,26 +3,28 @@ import { useDispatch, connect, useSelector } from 'react-redux';
 import { modelSelect, modelSelectFailure } from '@/modules/basic/model';
 import { Model } from '@/components';
 
-const ModelPage = () => {
+const ModelPage = ({}) => {
     const [modelList, setModelList] =useState({
        model:''
     })
-    const dispatch = useDispatch()
-    const onChange = e => {
-      console.log("value", e.target.value)
-      setModelList({...modelList, model: e.target.value})
-    }
 
-    const {model, modelSelected} = useSelector(state => state.model)
-    const onSubmit = e => {
-        e.preventDefault()
+    const dispatch = useDispatch()
+    const model_name = ['ysy', 'kang', 'jonadan_ces', 'haylyn', 'khw', 'leetaeyeon']
+    
+    // const {model, modelSelected} = useSelector(state => state.model)
+    const onSubmit = (e) => {
+       e.preventDefault()
+        const { value } = e.target;
+        console.log("value", value)
+        // console.log("모델네임", model_name[value])
+        setTimeout(() => setModelList({...modelList, model: value}), 3000);
+        // setModelList({...modelList, model: value})
         console.log("modelList", modelList)
-        setModelList({...modelList, model: e.target.value})
         dispatch(modelSelect(modelList))
-        dispatch(window.location.href = "/basic/message")
+        // dispatch(window.location.href = "/basic/message")
     }
   return (
-    <Model onChange={onChange} onSubmit={onSubmit}  />
+    <Model onSubmit={onSubmit}  />
   );
 };
 
