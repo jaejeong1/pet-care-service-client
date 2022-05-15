@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 // const theme = createTheme();
 
-export function Message() {
+export function Message({onChange, onSubmit, onDelete}) {
   const classes = useStyles();
   
   const [selectedIndex, setSelectedIndex] = React.useState(1);
@@ -141,8 +141,10 @@ export function Message() {
       <h1 align="center" className={classes.margin}>음식:Food</h1>
         <ListItem
           button
+          value='물 마시자'
+          name='food'
           selected={selectedIndex === 0}
-          onClick={(event) => handleListItemClick(event, 0)} //TODO: 이벤트 설정 및 파라미터보내주기
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <LocalDrinkTwoToneIcon />
@@ -151,8 +153,9 @@ export function Message() {
         </ListItem>
         <ListItem
           button
+          name='food'
           selected={selectedIndex === 1}
-          onClick={(event) => handleListItemClick(event, 1)}
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <OutdoorGrillTwoToneIcon />
@@ -161,8 +164,9 @@ export function Message() {
         </ListItem>
         <ListItem
           button
+          name='food'
           selected={selectedIndex === 2}
-          onClick={(event) => handleListItemClick(event, 2)}
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <OutdoorGrillTwoToneIcon />
@@ -188,8 +192,9 @@ export function Message() {
       <h1 align="center"className={classes.margin}>놀이:Play</h1>
         <ListItem
           button
+          name='play'
           selected={selectedIndex === 3}
-          onClick={(event) => handleListItemClick(event, 3)} //TODO: 이벤트 설정 및 파라미터보내주기
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <PetsTwoToneIcon />
@@ -198,6 +203,7 @@ export function Message() {
         </ListItem>
         <ListItem
         button
+        name='play'
         selected={selectedIndex === 4}
         onClick={(event) => handleListItemClick(event, 4)}
         >
@@ -208,8 +214,9 @@ export function Message() {
         </ListItem>
         <ListItem
           button
+          name='play'
           selected={selectedIndex === 5}
-          onClick={(event) => handleListItemClick(event, 5)}
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <PetsTwoToneIcon />
@@ -235,8 +242,9 @@ export function Message() {
       <h1 align="center" className={classes.margin}>감정:Emotion</h1>
         <ListItem
           button
+          name='emotion'
           selected={selectedIndex === 6}
-          onClick={(event) => handleListItemClick(event, 6)} //TODO: 이벤트 설정 및 파라미터보내주기
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <ChildCareTwoToneIcon />
@@ -245,8 +253,9 @@ export function Message() {
         </ListItem>
         <ListItem
           button
+          name='emotion'
           selected={selectedIndex === 7}
-          onClick={(event) => handleListItemClick(event, 7)}
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <EmojiEmotionsTwoToneIcon />
@@ -255,8 +264,9 @@ export function Message() {
         </ListItem>
         <ListItem
           button
+          name='emotion'
           selected={selectedIndex === 8}
-          onClick={(event) => handleListItemClick(event, 8)}
+          onClick={onSubmit}
         >
           <ListItemIcon>
             <FavoriteTwoToneIcon />
@@ -288,7 +298,7 @@ export function Message() {
             >
       Add More Message
       </Typography> 
-      <Box
+      <Box component="form" onSubmit={onSubmit} onDelete={onDelete} noValidate="noValidate"
               sx={{
                 marginTop: 10,
                 marginBottom: 20,
@@ -302,15 +312,18 @@ export function Message() {
           // style={{ margin: 8 }}
           // multiline
           // rows={4}
+          name='text'
           fullWidth
           // margin="normal"
-          // defaultValue="추가메세지를 입력하세요"
+          onChange={onChange}
           variant="filled"
         />
         <Box display="flex" justifyContent="right" p={1}>
             <Button 
               type="submit" 
               variant="contained"
+              // name="text"
+              onClick={onSubmit}
               sx={{
                   mt: 2,
                   mb: 1,
@@ -321,12 +334,13 @@ export function Message() {
             <Button 
               type="submit" 
               variant="contained"
+              onClick={onDelete}
               sx={{
                   mt: 2,
                   mb: 1,
                   bgcolor: '#677381'
               }}>
-              변경
+              삭제
             </Button>                 
         </Box> 
       </Box> 

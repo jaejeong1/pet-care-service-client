@@ -8,7 +8,7 @@ const headers = {
     Authorization: "JWT fefege..."
 }
 export const initialState = {
-   model: '',
+   modelinfo: '',
    modelSelected: false,
 }
 
@@ -53,6 +53,7 @@ const modelselect = handleActions(
 
   [MODELSELECT_SUCCESS]: (state, action) => ({
     ...state,
+    modelinfo: action.payload,
     modelSelected: true
   }),
 

@@ -98,7 +98,7 @@ export function Login({onChange, onSubmit}) {
                                 ),
                             }} />
                         <FormControlLabel
-                            control={<Checkbox value = "remember" color = "primary" />}
+                            control={<Checkbox value = "remember" />}
                             label="Remember me"/>
                         <Button
                             type="submit"

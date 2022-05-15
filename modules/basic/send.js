@@ -16,8 +16,7 @@ const headers = {
 }
 
 export const initialState = {
-    email: '',
-    name:'',
+    dispatchinfo:'',
     isdispatched: false,
     dispatchError: null
   }
@@ -69,12 +68,12 @@ const dispatchReducer = handleActions({
 
   [DISPATCH_SUCCESS]: (state, action) => ({
     ...state,
-    name: action.payload,
-    email: action.payload,
+    dispatchinfo: action.payload,
     isdispatched: true,
   }),
   [DISPATCH_FAILURE]: (state, action) => ({
       ...state,
+      isdispatched: false,
       dispatchError: action.payload
   }),
   // [EMAILDISPATCH_SUCCESS]: (state, action) => ({

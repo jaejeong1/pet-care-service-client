@@ -15,7 +15,7 @@ import { logoutRequest } from '@/modules/auth/login';
 import {useDispatch, connect} from 'react-redux';
 import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/system';
-
+import MenuIcon from '@material-ui/icons/Menu';
 
 const HomeIcon = createSvgIcon(
     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>,
@@ -25,9 +25,9 @@ const HomeIcon = createSvgIcon(
 const basicSettings = {
     subTitles: [
         // '반려견 홈케어 서비스',
-        '모델', '메세지', '이메일전송', '', '영상링크'
+        'Model', 'Make Scene ', 'Send Email', 'Scene Link'
     ],
-    urls: ["/basic/model", "/basic/message", "/basic/send", "/basic/scene", "/basic/scenelink"]
+    urls: ["/basic/model", "/basic/message", "/basic/send", "/basic/scenelink"]
 };
 
 const align = createTheme({
@@ -42,7 +42,7 @@ export function Nav() {
 
     const dispatch = useDispatch()
     const [imageInfos, setImageInfos] = useState({
-        imageUrl: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUg38c%2FbtrBLGyUiyO%2FlUMdQ6sjD96kFkKbpW8J10%2Fimg.png',
+        imageUrl: '',
         imageTitle: 'sign'
     });
     const [userUrls, setUserUrls] = useState({subTitles: [], urls: []});
@@ -76,10 +76,10 @@ export function Nav() {
                 subTitles: [
                     '회원가입', '로그인', '로그아웃'
                 ],
-                urls: ["/auth/register", "/auth/login",  "/auth/logout"]
+                urls: ["/auth/register", "/auth/login",  "/"]
             })
             setImageInfos({
-                imageUrl: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUg38c%2FbtrBLGyUiyO%2FlUMdQ6sjD96kFkKbpW8J10%2Fimg.png',
+                imageUrl: '',
                 imageTitle: 'sign'
             })
         } else {
@@ -126,8 +126,9 @@ export function Nav() {
                             }}
                             >
                             <a href='/'><HomeIcon
-                                color="primary"
+                                // color="primary"
                                 sx={{
+                ml: 5,                    
                 my: 0,
                 color: 'white',
                 display: 'block'
@@ -163,6 +164,8 @@ export function Nav() {
                                             key={i}
                                             onClick={handleCloseNavMenu}
                                             sx={{
+                                                ml: 2,
+                                                mr: 2,
                                                 my: 2,
                                                 color: 'white',
                                                 display: 'block',
@@ -187,8 +190,10 @@ export function Nav() {
                             <IconButton
                                 onClick={handleOpenUserMenu}
                                 sx={{
+                                    mr: 5,
                                     p: 0
                                 }}>
+                                {/* <MenuIcon /> */}
                                 <Avatar alt="Remy Sharp" src={imageInfos.imageUrl}/>
                             </IconButton>
                         </Tooltip>

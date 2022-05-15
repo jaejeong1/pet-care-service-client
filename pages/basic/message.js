@@ -1,27 +1,64 @@
-import {increaseAsync, decreaseAsync} from '@/modules/basic/model';
-import {connect} from 'react-redux';
+import React, {useState} from 'react';
+import {sceneRegister} from '@/modules/basic/message';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {Message} from '@/components';
 
-//TODO: 작업진행중, 미완성
-const MessagePage = ({number, increaseAsync, decreaseAsync}) => {
+//TODO: 작업진행중
+const MessagePage = () => {
+
+  const [message, setMessage] = useState({
+    food: '', play: '', emotion:'', text:''
+  })
+
+  const dispatch = useDispatch()
+
+  const onChange = e => {
+    e.preventDefault()
+    const {name, value} = e.target;
+    console.log("value, name", value, name)
+    setMessage({
+        ...message,
+        [name]: value
+    })
+}
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    //  const { name, value } = e.target;
+    //  console.log("value, name", value, name)
+     // TODO: value를 받아오는 법???
+    //  setMessage({...message, [name]: value})
+     console.log("message", message)
+     dispatch(sceneRegister(message))
+    //  dispatch(window.location.href = "/basic/message")
+ }
+
+ const onDelete = (e) => {
+  e.preventDefault()
+   const { name, value } = e.target;
+   console.log("value, name", value, name)
+   // TODO: value를 받아오는 법???
+   setMessage({...message, text:''})
+   console.log("message", message)
+   dispatch(sceneRegister(message))
+  //  dispatch(window.location.href = "/basic/message")
+}
+
+
 
     return (
         <>
-         <Message />
+         <Message onChange={onChange} onSubmit={onSubmit} onDelete={onDelete}/>
       </>
     );
 };
 
 
-const mapStateToProps = state => ({number: state.counter})
+const mapStateToProps = state => ({isregistered : state.message })
 const registerActions = {
-  increaseAsync, decreaseAsync
+  sceneRegister
 }
 
 export default connect( mapStateToProps, registerActions)(MessagePage);
 
 
-// export default connect(
-//     state => ({number: state.counter}),
-//     {increaseAsync, decreaseAsync}
-// )(CounterPage);

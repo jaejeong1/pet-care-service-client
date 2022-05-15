@@ -1,5 +1,5 @@
 import styles from "@/styles/Layout.module.css";
-import { Modal, Pagination, Table, Send } from '@/components'
+import { Modal, Pagination, Table, Listitems, Dashboard } from '@/components'
 
 
 export function Layout({ children }){
@@ -8,10 +8,9 @@ export function Layout({ children }){
     <div>
       {/* <main className={styles.main}>{children}</main> */}
       {/* <h1>여기는 layout</h1> */}
+      {/* <Dashboard/> */}
       <main>{children}</main>
-      <Table/>
-      <Send/>
-      <Modal/>
+      {/* <Dashboard/> */}
     </div>
 
   );

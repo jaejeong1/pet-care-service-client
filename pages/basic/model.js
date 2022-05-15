@@ -17,10 +17,11 @@ const ModelPage = ({}) => {
         const { value } = e.target;
         console.log("value", value)
         // console.log("모델네임", model_name[value])
-        setModelList({...modelList, model: value})
+        const updateModelList = {...modelList, model: value}
+        setModelList(updateModelList)
         console.log("modelList", modelList)
         dispatch(modelSelect(modelList))
-        dispatch(window.location.href = "/basic/message")
+        // dispatch(window.location.href = "/basic/message")
     }
   return (
     <Model model={model} onSubmit={onSubmit}  />
