@@ -43,7 +43,7 @@ const theme = createTheme();
 // }
 
 
-export function Model({onSubmit}) {
+export function Model({onChange, onSubmit}) {
 
 const infos = [
   {

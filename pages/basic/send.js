@@ -4,7 +4,7 @@ import {Send} from '@/components';
 
 import { dispatchRequest } from '@/modules/basic/send';
 
-const SendPage = ({}) => {
+const SendPage = () => {
 
     const [send, setSend] = useState({name: '', email: ''})
     const dispatch = useDispatch()

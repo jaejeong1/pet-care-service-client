@@ -20,7 +20,7 @@ const RegisterPage = () => {
     const onSubmit = e => {
         e.preventDefault()
         console.log("user2", user)
-        alert('회원가입정보: '+JSON.stringify(user))
+        // alert('회원가입정보: '+JSON.stringify(user))
         dispatch(registerRequest(user))
     }
   return (

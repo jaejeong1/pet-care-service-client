@@ -24,27 +24,21 @@ const MessagePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    //  const { name, value } = e.target;
-    //  console.log("value, name", value, name)
-     // TODO: value를 받아오는 법???
+     // TODO: button클릭시 value를 받아오는 법???
     //  setMessage({...message, [name]: value})
      console.log("message", message)
      dispatch(sceneRegister(message))
-    //  dispatch(window.location.href = "/basic/message")
- }
+}
 
  const onDelete = (e) => {
   e.preventDefault()
    const { name, value } = e.target;
    console.log("value, name", value, name)
-   // TODO: value를 받아오는 법???
    setMessage({...message, text:''})
    console.log("message", message)
    dispatch(sceneRegister(message))
-  //  dispatch(window.location.href = "/basic/message")
+  
 }
-
-
 
     return (
         <>

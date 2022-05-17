@@ -11,9 +11,19 @@ const ModelPage = ({}) => {
     const dispatch = useDispatch()
     // const model_name = ['ysy', 'kang', 'jonadan_ces', 'haylyn', 'khw', 'leetaeyeon']
     
+    const onChange = e =>{
+      e.preventDefault()
+      const{name, value} = e.target;
+      console.log("name", name)
+      console.log("vlaue", value)
+      // setUser({...user,[name]: value})
+      setModelList({...modelList, [name]: value})
+  }
+
+
     const { model } = useSelector(state => state.model)
     const onSubmit = (e) => {
-       e.preventDefault()
+        e.preventDefault()
         const { value } = e.target;
         console.log("value", value)
         // console.log("모델네임", model_name[value])
